@@ -1,0 +1,65 @@
+{
+    "env_name": "CustomAntBulletEnv",
+    "env_config": {
+        "xml_path": "data/xmls/ant/test_sigma_between_0_05/ant_perturbed_0.xml",
+        "render": false
+    },
+    "num_trainer_workers": 7,
+    "policies_to_train": {
+        "policy": true
+    },
+    "policy_classes": {
+        "policy": "sac"
+    },
+    "policy_configs": {
+        "policy": {
+            "Q_model": {
+                "fcnet_activation": "relu",
+                "fcnet_hiddens": [
+                    256,
+                    256
+                ]
+            },
+            "policy_model": {
+                "fcnet_activation": "relu",
+                "fcnet_hiddens": [
+                    256,
+                    256
+                ]
+            },
+            "normalize_actions": true,
+            "no_done_at_end": false,
+            "n_step": 1,
+            "timesteps_per_iteration": 1500,
+            "buffer_size": 1000000,
+            "optimization": {
+                "actor_learning_rate": 3e-4,
+                "critic_learning_rate": 3e-4,
+                "entropy_learning_rate": 3e-4
+            },
+            "grad_clip": null,
+            "learning_starts": 10000,
+            "target_network_update_freq": 0,
+            "worker_side_prioritization": false,
+            "min_iter_time_s": 1
+        }
+    },
+    "agent_policy_dict": {
+        "agent": "policy"
+    },
+    "gamma": 0.995,
+    "rollout_fragment_length": 1,
+    "train_batch_size": 256,
+    "lr": 1e-4,
+    "num_gpus": 0,
+    "extra_trainer_params": {
+        "framework": "torch",
+        "seed": 0
+    },
+    "trainer_class": "sac",
+    "episodes_total": 1e7,
+    "logdir": "output",
+    "trial_name": "specialist_ant",
+    "checkpoint_freq": 100,
+    "restore_checkpoint_path": null
+}
