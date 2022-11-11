@@ -11,27 +11,27 @@ class ModelFactory:
     @staticmethod
     def register(model_name):
         if model_name == "oracle_policy":
-            from src.models.rma import OraclePolicyModel
+            from dmap.models.rma import OraclePolicyModel
 
             ModelCatalog.register_custom_model(model_name, OraclePolicyModel)
         elif model_name == "oracle_q":
-            from src.models.rma import OracleQModel
+            from dmap.models.rma import OracleQModel
 
             ModelCatalog.register_custom_model(model_name, OracleQModel)
         elif model_name == "tcn_policy":
-            from src.models.rma import TCNPolicyModel
+            from dmap.models.rma import TCNPolicyModel
 
             ModelCatalog.register_custom_model(model_name, TCNPolicyModel)
         elif model_name == "oracle_q_adapt":
-            from src.models.rma import OracleQAdaptModel
+            from dmap.models.rma import OracleQAdaptModel
 
             ModelCatalog.register_custom_model(model_name, OracleQAdaptModel)
         elif model_name == "tcn_q":
-            from src.models.rma import TCNQModel
+            from dmap.models.rma import TCNQModel
 
             ModelCatalog.register_custom_model(model_name, TCNQModel)
         elif model_name == "dmap_policy":
-            from src.models.dmap import DMAPPolicyModel
+            from dmap.models.dmap import DMAPPolicyModel
 
             ModelCatalog.register_custom_model(model_name, DMAPPolicyModel)
         else:

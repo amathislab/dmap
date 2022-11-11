@@ -4,9 +4,9 @@ import numpy as np
 from definitions import ROOT_DIR
 from torch.utils.data import DataLoader
 from ray.rllib import rollout
-from src.helpers.loading import get_env_and_config, get_trainer
-from src.helpers.data_saver import DataSaver
-from src.helpers.rma import (
+from dmap.helpers.loading import get_env_and_config, get_trainer
+from dmap.helpers.data_saver import DataSaver
+from dmap.helpers.rma import (
     transfer_policy_weights,
     AdaptModule,
     build_dataset,

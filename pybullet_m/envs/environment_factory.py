@@ -1,8 +1,8 @@
 import gym
-import src.envs.ant
-import src.envs.hopper
-import src.envs.walker
-import src.envs.half_cheetah
+import pybullet_m.envs.ant
+import pybullet_m.envs.hopper
+import pybullet_m.envs.walker
+import pybullet_m.envs.half_cheetah
 from ray.tune import register_env
 
 

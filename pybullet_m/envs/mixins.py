@@ -3,7 +3,7 @@ import numpy as np
 from collections import deque
 
 
-class RMAMixin:
+class HistoryMixin:
     """This class provides additional functionality to a random perturbation environment"""
 
     def _init_addon(self, include_adapt_state, num_memory_steps):

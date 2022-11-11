@@ -4,11 +4,11 @@ import ray
 from datetime import datetime
 from ray.tune import tune
 from definitions import ROOT_DIR
-from src.envs.environment_factory import EnvironmentFactory
-from src.helpers.experiment_config import ExperimentConfig
-from src.models.model_factory import ModelFactory
+from pybullet_m.envs.environment_factory import EnvironmentFactory
+from dmap.helpers.experiment_config import ExperimentConfig
+from dmap.models.model_factory import ModelFactory
 
-"""
+""">
 Train an agent in the morphological perturbation environments with SAC. The parameters of the algorithm
 and of the network architecture are defined in the configuration json file. 
 

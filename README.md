@@ -2,9 +2,7 @@
 
 Website: [DMAP](https://amathislab.github.io/dmap/)
 
-## I want to use DMAP in my custom environment!
-
-## I want to reproduce the experiments reported in the paper!
+## Reproducing the results of the paper
 
 ### Setup
 
@@ -80,6 +78,8 @@ python main_attention.py
 
 The default configuration will generate the attention dataset for DMAP Ant, sigma = 0.1, seed = 2 (available as a pretrained model). To run this script with other configurations, first make sure to have trained the corresponding DMAP agent.
 
+
+## Using DMAP in a custom environment
 
 ## Reference
 

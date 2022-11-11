@@ -1,8 +1,5 @@
-import os
 import numpy as np
-from xml.dom import minidom
 from xml.etree import ElementTree as ET
-from definitions import ROOT_DIR
 
 
 def get_fromto_coords(geom):

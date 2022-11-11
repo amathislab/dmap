@@ -6,10 +6,9 @@ import gym
 from pybullet_envs.robot_locomotors import Hopper, WalkerBase
 from pybullet_envs.gym_locomotion_envs import WalkerBaseBulletEnv
 from definitions import ROOT_DIR
-from src.envs.rma_mixin import RMAMixin
-from src.envs.walker import CustomWalker2DBulletEnv
-from src.helpers.xml_generator import perturb_hopper_xml
-from src.metrics.singleagent_callbacks import DefaultCallbacks
+from pybullet_m.envs.mixins import HistoryMixin
+from pybullet_m.envs.walker import CustomWalker2DBulletEnv
+from pybullet_m.helpers.xml_generator import perturb_hopper_xml
 
 
 class HopperXml(Hopper):
@@ -82,10 +81,10 @@ class RandomPerturbationHopperBulletEnv(CustomHopperBulletEnv):
         self.sigma = sigma
         self.action_dim = action_dim
         self.obs_dim = obs_dim
-        self.temp_dir = os.path.join(ROOT_DIR, "data", "xmls", "hopper", "temp")
+        self.temp_dir = os.path.join(ROOT_DIR, "pybullet_m", "xmls", "hopper", "temp")
         os.makedirs(self.temp_dir, exist_ok=True)
         self.base_xml_path = os.path.join(
-            ROOT_DIR, "data", "xmls", "hopper", "hopper.xml"
+            ROOT_DIR, "pybullet_m", "xmls", "hopper", "hopper.xml"
         )
         CustomHopperBulletEnv.__init__(self, self.base_xml_path, render)
         self.already_reset = False
@@ -134,9 +133,6 @@ class RandomPerturbationHopperBulletEnv(CustomHopperBulletEnv):
         info.update(self.current_perturb)
         return state, reward, done, info
 
-    def get_metrics_callback(self):
-        return DefaultCallbacks()
-
     def make_random_perturb(self):
         return {
             p: random.uniform(-self.sigma, self.sigma) for p in self.perturbation_list
@@ -149,7 +145,7 @@ class RandomPerturbationHopperBulletEnv(CustomHopperBulletEnv):
         }
 
 
-class RMAHopperBulletEnv(RandomPerturbationHopperBulletEnv, RMAMixin):
+class RMAHopperBulletEnv(RandomPerturbationHopperBulletEnv, HistoryMixin):
     """Hopper environment selecting a random perturbation at the beginning of each episode.
     It includes the raw perturbation in the state, so that the Oracle agent can use it. It also
     optionally includes a history of transitions, to be used by RMA, TCN and DMAP.

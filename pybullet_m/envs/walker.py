@@ -6,9 +6,8 @@ import gym
 from pybullet_envs.robot_locomotors import Walker2D, WalkerBase
 from pybullet_envs.gym_locomotion_envs import WalkerBaseBulletEnv
 from definitions import ROOT_DIR
-from src.envs.rma_mixin import RMAMixin
-from src.helpers.xml_generator import perturb_walker_xml
-from src.metrics.singleagent_callbacks import DefaultCallbacks
+from pybullet_m.envs.mixins import HistoryMixin
+from pybullet_m.helpers.xml_generator import perturb_walker_xml
 
 
 class Walker2DXml(Walker2D):
@@ -85,10 +84,10 @@ class RandomPerturbationWalker2DBulletEnv(CustomWalker2DBulletEnv):
         self.sigma = sigma
         self.action_dim = action_dim
         self.obs_dim = obs_dim
-        self.temp_dir = os.path.join(ROOT_DIR, "data", "xmls", "walker", "temp")
+        self.temp_dir = os.path.join(ROOT_DIR, "pybullet_m", "xmls", "walker", "temp")
         os.makedirs(self.temp_dir, exist_ok=True)
         self.base_xml_path = os.path.join(
-            ROOT_DIR, "data", "xmls", "walker", "walker.xml"
+            ROOT_DIR, "pybullet_m", "xmls", "walker", "walker.xml"
         )
         CustomWalker2DBulletEnv.__init__(self, self.base_xml_path, render)
         self.already_reset = False
@@ -137,9 +136,6 @@ class RandomPerturbationWalker2DBulletEnv(CustomWalker2DBulletEnv):
         info.update(self.current_perturb)
         return state, reward, done, info
 
-    def get_metrics_callback(self):
-        return DefaultCallbacks()
-
     def make_random_perturb(self):
         return {
             p: random.uniform(-self.sigma, self.sigma) for p in self.perturbation_list
@@ -177,7 +173,7 @@ class SymmetricRandomPerturbationWalker2DBulletEnv(RandomPerturbationWalker2DBul
         return perturbations_dict
 
 
-class RMAWalker2DBulletEnv(RandomPerturbationWalker2DBulletEnv, RMAMixin):
+class RMAWalker2DBulletEnv(RandomPerturbationWalker2DBulletEnv, HistoryMixin):
     """Walker environment selecting a random perturbation at the beginning of each episode.
     It includes the raw perturbation in the state, so that the Oracle agent can use it. It also
     optionally includes a history of transitions, to be used by RMA, TCN and DMAP.  There is no
@@ -232,7 +228,7 @@ class RMAWalker2DBulletEnv(RandomPerturbationWalker2DBulletEnv, RMAMixin):
 
 
 class RMASymmetricWalker2DBulletEnv(
-    SymmetricRandomPerturbationWalker2DBulletEnv, RMAMixin
+    SymmetricRandomPerturbationWalker2DBulletEnv, HistoryMixin
 ):
     """Walker environment selecting a random perturbation at the beginning of each episode.
     It includes the raw perturbation in the state, so that the Oracle agent can use it. It also

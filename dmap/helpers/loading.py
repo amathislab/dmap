@@ -1,6 +1,6 @@
-from src.models.model_factory import ModelFactory
-from src.envs.environment_factory import EnvironmentFactory
-from src.helpers.experiment_config import ExperimentConfig
+from dmap.models.model_factory import ModelFactory
+from dmap.helpers.experiment_config import ExperimentConfig
+from pybullet_m.envs.environment_factory import EnvironmentFactory
 
 
 def get_env_and_config(config_path, update_params=None):

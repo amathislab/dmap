@@ -6,7 +6,7 @@ import torch
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../src")
 
-from src.models.dmap import DMAPPolicyModel
+from dmap.models.dmap import DMAPPolicyModel
 from collections import namedtuple
 
 
