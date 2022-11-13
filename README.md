@@ -59,7 +59,7 @@ model).
 To evaluate trained agents, run:
 
 ``` bash
-python main_evaluate.py
+python main_evaluation.py
 ```
 
 The script is set to evaluate Oracle Half Cheetah, sigma = 0.1 and seed = 2, which is provided as a pretrained agent. To evaluate the other provided pretrained agent, DMAP Ant sigma = 0.1 and seed = 2, change the script parameters `env_name` from `"half_cheetah"` to `"ant"` and `algorithm` from `"oracle"` to `"dmap"`. It is also possible to produce the ablation results with the same script, in which DMAP is run ignoring the output of the attention encoding network. In this case, the parameter `algorithm` must be set to `"dmap-ne"`
