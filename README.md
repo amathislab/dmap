@@ -1,6 +1,17 @@
-# Paper accepted at NeurIPS 2022!
+# DMAP: a Distributed Morphological Attention Policy for Learning to Locomote with a Changing Body
 
-Website: [DMAP](https://amathislab.github.io/dmap/)
+We introduce DMAP, a biologically-inspired, attention-based policy network architecture. DMAP combines independent proprioceptive processing, a distributed policy with individual controllers for each joint, and an attention mechanism, to dynamically gate sensory information from different body parts to different controllers. Despite not having access to the (hidden) morphology information, DMAP can be trained end-to-end in all the considered environments, overall matching or surpassing the performance of an oracle agent. Thus DMAP, implementing principles from biological motor control, provides a strong inductive bias for learning challenging sensorimotor tasks. Overall, our work corroborates the power of these principles in challenging locomotion tasks.
+
+This repository presents the code for DMAP. 
+
+Check out our website for more details and videos: [DMAP](https://amathislab.github.io/dmap/)
+
+## Notes: 
+
+- Sept 2022: Paper accepted at [NeurIPS 2022](https://nips.cc/Conferences/2022/Schedule)!
+- Nov 2022: For testing our agents, we use a slightly adapted version of the Pybullet-M benchmark. Currently this benchmark code is integrated in our repository, but it will shortly be released as a stand-alone repository (stay tuned). For more information on the benchmark as well as baselines check out: 
+
+Mann, K. S., Schneider, S., Chiappa, A., Lee, J. H., Bethge, M., Mathis, A., & Mathis, M. W. (2021, March). [Out-of-distribution generalization of internal models is correlated with reward.](https://openreview.net/forum?id=hR_TNbCr_nQ) In Self-Supervision for Reinforcement Learning Workshop-ICLR 2021.
 
 ## Reproducing the results of the paper
 
@@ -80,6 +91,8 @@ The default configuration will generate the attention dataset for DMAP Ant, sigm
 
 
 ## Using DMAP in a custom environment
+
+TBD. 
 
 ## Reference
 
