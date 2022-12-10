@@ -4,7 +4,7 @@
 We introduce DMAP, a biologically-inspired, attention-based policy network architecture. DMAP combines independent proprioceptive processing, a distributed policy with individual controllers for each joint, and an attention mechanism, to dynamically gate sensory information from different body parts to different controllers (see diagram below). Despite not having access to the (hidden) morphology information, DMAP can be trained end-to-end in all the considered environments, overall matching or surpassing the performance of an oracle agent. Thus DMAP, implementing principles from biological motor control, provides a strong inductive bias for learning challenging sensorimotor tasks. Overall, our work corroborates the power of these principles in challenging locomotion tasks.
 
 <p>
-<img src="media/architecture.png" height="300">
+<img src="media/architecture.png" height="500">
 </p>
 
 This repository presents the code for DMAP.
@@ -13,13 +13,8 @@ Check out our website for more details and videos: [DMAP](https://amathislab.git
 
 ## Example body morphologies and agent locomotion performance
 
-<p>
-<img src="media/ant_sigma_03_seed_2_episode_7.mp4?format=300w" height="150">
-</p>
-<p>
-<img src="media/ant_sigma_03_seed_2_episode_1.mp4?format=300w" height="150">
-</p>
-
+[![Example 1](http://img.youtube.com/vi/zbsBw1ZCs9I/0.jpg)](https://youtu.be/zbsBw1ZCs9I "Example 1")
+[![Example 2](http://img.youtube.com/vi/_RuMbCHVCsg/0.jpg)](https://youtu.be/_RuMbCHVCsg "Example 1")
 
 ## Notes:
 
