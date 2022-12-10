@@ -11,11 +11,6 @@ This repository presents the code for DMAP.
 
 Check out our website for more details and videos: [DMAP](https://amathislab.github.io/dmap/)
 
-## Example body morphologies and agent locomotion performance
-
-[![Example 1](http://img.youtube.com/vi/zbsBw1ZCs9I/0.jpg)](https://youtu.be/zbsBw1ZCs9I "Example 1")
-[![Example 2](http://img.youtube.com/vi/_RuMbCHVCsg/0.jpg)](https://youtu.be/_RuMbCHVCsg "Example 1")
-
 ## Notes:
 
 - Dec 2022: Check out this [EPFL news article](https://actu.epfl.ch/news/locomotion-modeling-evolves-with-brain-inspired-ne/) on our work! Also available in [French](https://actu.epfl.ch/news/faire-avancer-la-modelisation-de-la-locomotion/).
@@ -23,6 +18,15 @@ Check out our website for more details and videos: [DMAP](https://amathislab.git
 - Sept 2022: Paper accepted at [NeurIPS 2022](https://nips.cc/Conferences/2022/Schedule)!
 
 Mann, K. S., Schneider, S., Chiappa, A., Lee, J. H., Bethge, M., Mathis, A., & Mathis, M. W. (2021, March). [Out-of-distribution generalization of internal models is correlated with reward.](https://openreview.net/forum?id=hR_TNbCr_nQ) In Self-Supervision for Reinforcement Learning Workshop-ICLR 2021.
+
+
+## Example body morphologies and agent locomotion performance
+
+Please click on the images to watch them on YouTube.
+
+[![Example 1](http://img.youtube.com/vi/zbsBw1ZCs9I/0.jpg)](https://youtu.be/zbsBw1ZCs9I "Example 1")
+[![Example 2](http://img.youtube.com/vi/_RuMbCHVCsg/0.jpg)](https://youtu.be/_RuMbCHVCsg "Example 1")
+
 
 ## Installation and reproducing results
 
