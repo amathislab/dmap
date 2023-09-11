@@ -26,7 +26,7 @@ config_path = os.path.join(
     ROOT_DIR,
     "configs",
     "walker",  # "ant", "walker", "hopper", "half_cheetah"
-    "simple_walker.json",  # "simple", "oracle", "tcn", "dmap"
+    "dmap_walker.json",  # "simple", "oracle", "tcn", "dmap"
 )
 config = ExperimentConfig(config_path)
 env = EnvironmentFactory.register(config.env_name, **config.env_config)

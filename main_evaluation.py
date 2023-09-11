@@ -1,10 +1,11 @@
+import argparse
 import os
 import pickle
 import json
 from definitions import ROOT_DIR
-from src.envs.environment_factory import EnvironmentFactory
-from src.helpers.loading import get_env_and_config, get_trainer
-from src.helpers.attention import compute_action_without_encoding
+from pybullet_m.envs.environment_factory import EnvironmentFactory
+from dmap.helpers.loading import get_env_and_config, get_trainer
+from dmap.helpers.attention import compute_action_without_encoding
 
 """
 Test a pretrained agent on a set of 100 body configurations per perturbation level. Independently
@@ -22,10 +23,18 @@ so make sure it is there. Furthermore, it expects the configuration file to be i
 the example provided for half_cheetah oracle sigma 0.1 seed 2 in "data/half_cheetah/pretrained.
 """
 
-env_name = "half_cheetah"  # walker, half_cheetah, hopper, ant
+env_name = "ant"  # walker, half_cheetah, hopper, ant
 seed = 2  # 0, 1, 2, 3, 4
 sigma = 0.1  # 0.1, 0.3, 0.5
-algorithm = "oracle"  # "simple", "oracle", "rma", "tcn", "dmap", "dmap-ne"
+algorithm = "dmap-icl"  # "simple", "oracle", "rma", "tcn", "dmap", "dmap-ne", "dmap-icl"
+
+STEPS_BF_FREEZING = 1000
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--steps', type=int, default=1000)
+    args = parser.parse_args()
+    STEPS_BF_FREEZING = args.steps
 
 sigma_literal = str(sigma).replace(".", "")
 out_name_specs = f"{algorithm}_seed_{seed}_sigma_{sigma_literal}"
@@ -80,6 +89,16 @@ config_file_name = [
 ][0]
 config_file_path = os.path.join(config_folder_path, config_file_name)
 
+# TODO: find a less ugly way of transmitting steps parameter to model
+with open(config_file_path, 'r+') as json_file:
+    config_json = json.load(json_file)
+    # This is awful
+    config_json['policy_configs']['policy']['policy_model']['custom_model_config'] = {}
+    config_json['policy_configs']['policy']['policy_model']['custom_model_config']['steps'] = STEPS_BF_FREEZING
+    json_file.seek(0)
+    json.dump(config_json, json_file)
+    json_file.truncate()
+
 env, config = get_env_and_config(config_file_path)
 
 print(
@@ -130,6 +149,7 @@ for folder_name in folder_names_list:
                 action = trainer.compute_single_action(obs, explore=False)
             obs, reward, done, info = env.step(action)
             cum_reward += reward
+        env.close() # TODO: any reason why not using it before? (Added to resolve GUI crash when resetting)
         results_dict[agent]["results"][folder_name].append(cum_reward)
         print(
             "agent: ",
@@ -142,7 +162,7 @@ for folder_name in folder_names_list:
 os.makedirs(out_folder, exist_ok=True)
 out_path = os.path.join(
     out_folder,
-    f"results_{out_name_specs}.json",
+    f"results_{out_name_specs}_steps_{STEPS_BF_FREEZING}.json",
 )
 with open(out_path, "w") as file:
     json.dump(results_dict, file)

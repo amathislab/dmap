@@ -1,0 +1,212 @@
+<?xml version="1.0" ?>
+<mujoco model="ant">
+	
+  
+	<compiler angle="degree" coordinate="local" inertiafromgeom="true"/>
+	
+  
+	<option integrator="RK4" timestep="0.01"/>
+	
+  
+	<custom>
+		
+    
+		<numeric data="0.0 0.0 0.55 1.0 0.0 0.0 0.0 0.0 1.0 0.0 -1.0 0.0 -1.0 0.0 1.0" name="init_qpos"/>
+		
+  
+	</custom>
+	
+  
+	<default>
+		
+    
+		<joint armature="1" damping="1" limited="true"/>
+		
+    
+		<geom conaffinity="0" condim="3" density="5.0" friction="1.5 0.1 0.1" margin="0.01" rgba="0.8 0.6 0.4 1"/>
+		
+  
+	</default>
+	
+  
+	<worldbody>
+		
+    
+		<body name="torso" pos="0 0 0.75">
+			
+      
+			<geom name="torso_geom" pos="0 0 0" size="0.2502351941910548" type="sphere"/>
+			
+      
+			<!--joint armature="0" damping="0" limited="false" margin="0.01" name="root" pos="0 0 0" type="free"/-->
+			
+      
+			<body name="front_left_leg" pos="0 0 0">
+				
+        
+				<geom fromto="0 0 0 0.2 0.2 0" name="aux_1_geom" size="0.08703304793379943" type="capsule" rgba=".8 .5 .3 1"/>
+				
+        
+				<body name="aux_1" pos="0.2 0.2 0">
+					
+          
+					<joint axis="0 0 1" name="hip_1" pos="0.0 0.0 0.0" range="-40 40" type="hinge"/>
+					
+          
+					<geom fromto="0 0 0 0.18769946260818493 0.18769946260818493 0" name="left_leg_geom" size="0.08703304793379943" type="capsule" rgba=".8 .5 .3 1"/>
+					
+          
+					<body pos="0.18769946260818493 0.18769946260818493 0" name="front_left_foot">
+						
+            
+						<joint axis="-1 1 0" name="ankle_1" pos="0.0 0.0 0.0" range="30 100" type="hinge"/>
+						
+            
+						<geom fromto="0 0 0 0.37539892521636986 0.37539892521636986 0" name="left_ankle_geom" size="0.08703304793379943" type="capsule" rgba=".8 .5 .3 1"/>
+						
+          
+					</body>
+					
+        
+				</body>
+				
+      
+			</body>
+			
+      
+			<body name="front_right_leg" pos="0 0 0">
+				
+        
+				<geom fromto="0 0 0 -0.2 0.2 0" name="aux_2_geom" size="0.08379487801872557" type="capsule"/>
+				
+        
+				<body name="aux_2" pos="-0.2 0.2 0">
+					
+          
+					<joint axis="0 0 1" name="hip_2" pos="0.0 0.0 0.0" range="-40 40" type="hinge"/>
+					
+          
+					<geom fromto="0 0 0 -0.20129943938007214 0.20129943938007214 0" name="right_leg_geom" size="0.08379487801872557" type="capsule"/>
+					
+          
+					<body pos="-0.20129943938007214 0.20129943938007214 0" name="front_right_foot">
+						
+            
+						<joint axis="1 1 0" name="ankle_2" pos="0.0 0.0 0.0" range="-100 -30" type="hinge"/>
+						
+            
+						<geom fromto="0 0 0 -0.4025988787601443 0.4025988787601443 0" name="right_ankle_geom" size="0.08379487801872557" type="capsule"/>
+						
+          
+					</body>
+					
+        
+				</body>
+				
+      
+			</body>
+			
+      
+			<body name="left_back_leg" pos="0 0 0">
+				
+        
+				<geom fromto="0 0 0 -0.2 -0.2 0" name="aux_3_geom" size="0.07963363417608277" type="capsule"/>
+				
+        
+				<body name="aux_3" pos="-0.2 -0.2 0">
+					
+          
+					<joint axis="0 0 1" name="hip_3" pos="0.0 0.0 0.0" range="-40 40" type="hinge"/>
+					
+          
+					<geom fromto="0 0 0 -0.20433165787014637 -0.20433165787014637 0" name="back_leg_geom" size="0.07963363417608277" type="capsule"/>
+					
+          
+					<body pos="-0.20433165787014637 -0.20433165787014637 0" name="left_back_foot">
+						
+            
+						<joint axis="-1 1 0" name="ankle_3" pos="0.0 0.0 0.0" range="-100 -30" type="hinge"/>
+						
+            
+						<geom fromto="0 0 0 -0.40866331574029274 -0.40866331574029274 0" name="third_ankle_geom" size="0.07963363417608277" type="capsule"/>
+						
+          
+					</body>
+					
+        
+				</body>
+				
+      
+			</body>
+			
+      
+			<body name="right_back_leg" pos="0 0 0">
+				
+        
+				<geom fromto="0 0 0 0.2 -0.2 0" name="aux_4_geom" size="0.07770759936636291" type="capsule" rgba=".8 .5 .3 1"/>
+				
+        
+				<body name="aux_4" pos="0.2 -0.2 0">
+					
+          
+					<joint axis="0 0 1" name="hip_4" pos="0.0 0.0 0.0" range="-40 40" type="hinge"/>
+					
+          
+					<geom fromto="0 0 0 0.18404131386795844 -0.18404131386795844 0" name="rightback_leg_geom" size="0.07770759936636291" type="capsule" rgba=".8 .5 .3 1"/>
+					
+          
+					<body pos="0.18404131386795844 -0.18404131386795844 0" name="right_back_foot">
+						
+            
+						<joint axis="1 1 0" name="ankle_4" pos="0.0 0.0 0.0" range="30 100" type="hinge"/>
+						
+            
+						<geom fromto="0 0 0 0.3680826277359169 -0.3680826277359169 0" name="fourth_ankle_geom" size="0.07770759936636291" type="capsule" rgba=".8 .5 .3 1"/>
+						
+          
+					</body>
+					
+        
+				</body>
+				
+      
+			</body>
+			
+    
+		</body>
+		
+  
+	</worldbody>
+	
+  
+	<actuator>
+		
+    
+		<motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="hip_4" gear="150"/>
+		
+    
+		<motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="ankle_4" gear="150"/>
+		
+    
+		<motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="hip_1" gear="150"/>
+		
+    
+		<motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="ankle_1" gear="150"/>
+		
+    
+		<motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="hip_2" gear="150"/>
+		
+    
+		<motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="ankle_2" gear="150"/>
+		
+    
+		<motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="hip_3" gear="150"/>
+		
+    
+		<motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="ankle_3" gear="150"/>
+		
+  
+	</actuator>
+	
+
+</mujoco>

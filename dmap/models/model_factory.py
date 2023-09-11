@@ -34,6 +34,10 @@ class ModelFactory:
             from dmap.models.dmap import DMAPPolicyModel
 
             ModelCatalog.register_custom_model(model_name, DMAPPolicyModel)
+        elif model_name == "dmap_icl":
+            from dmap.models.dmap_icl import DMAPPolicyModelICL
+
+            ModelCatalog.register_custom_model(model_name, DMAPPolicyModelICL)
         else:
             raise ValueError("Unknown model name", model_name)
 
