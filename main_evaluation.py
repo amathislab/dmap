@@ -89,15 +89,16 @@ config_file_name = [
 ][0]
 config_file_path = os.path.join(config_folder_path, config_file_name)
 
-# TODO: find a less ugly way of transmitting steps parameter to model
-with open(config_file_path, 'r+') as json_file:
-    config_json = json.load(json_file)
-    # This is awful
-    config_json['policy_configs']['policy']['policy_model']['custom_model_config'] = {}
-    config_json['policy_configs']['policy']['policy_model']['custom_model_config']['steps'] = STEPS_BF_FREEZING
-    json_file.seek(0)
-    json.dump(config_json, json_file)
-    json_file.truncate()
+if algorithm == "dmap-icl":
+    # TODO: find a less ugly way of transmitting steps parameter to model
+    with open(config_file_path, 'r+') as json_file:
+        config_json = json.load(json_file)
+        # This is awful
+        config_json['policy_configs']['policy']['policy_model']['custom_model_config'] = {}
+        config_json['policy_configs']['policy']['policy_model']['custom_model_config']['steps'] = STEPS_BF_FREEZING
+        json_file.seek(0)
+        json.dump(config_json, json_file)
+        json_file.truncate()
 
 env, config = get_env_and_config(config_file_path)
 
