@@ -144,6 +144,7 @@ class DMAPPolicyModelICL(TorchModelV2, nn.Module):
         embedding = torch.matmul(
             keys, values.transpose(1, 2)
         )  # Shape: (batch, a_size, v_size)
+        # TODO: plot
         action_elements_list = []
         for i in range(self.a_space_size):
             e_i = embedding[:, i, :]
