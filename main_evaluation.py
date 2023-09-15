@@ -23,8 +23,8 @@ so make sure it is there. Furthermore, it expects the configuration file to be i
 the example provided for half_cheetah oracle sigma 0.1 seed 2 in "data/half_cheetah/pretrained.
 """
 
-env_name = "ant"  # walker, half_cheetah, hopper, ant
-seed = 2  # 0, 1, 2, 3, 4
+env_name = "hopper"  # walker, half_cheetah, hopper, ant
+seed = 2 if env_name == 'ant' else (0 if env_name == 'walker' else 1)  # 0, 1, 2, 3, 4
 sigma = 0.1  # 0.1, 0.3, 0.5
 algorithm = "dmap-icl"  # "simple", "oracle", "rma", "tcn", "dmap", "dmap-ne", "dmap-icl"
 
@@ -90,10 +90,10 @@ config_file_name = [
 config_file_path = os.path.join(config_folder_path, config_file_name)
 
 if algorithm == "dmap-icl":
-    # TODO: find a less ugly way of transmitting steps parameter to model
+    # Transmit steps parameter to model via json config file
+    # This is not a pretty way to do it, but it works...
     with open(config_file_path, 'r+') as json_file:
         config_json = json.load(json_file)
-        # This is awful
         config_json['policy_configs']['policy']['policy_model']['custom_model_config'] = {}
         config_json['policy_configs']['policy']['policy_model']['custom_model_config']['steps'] = STEPS_BF_FREEZING
         json_file.seek(0)
@@ -150,7 +150,7 @@ for folder_name in folder_names_list:
                 action = trainer.compute_single_action(obs, explore=False)
             obs, reward, done, info = env.step(action)
             cum_reward += reward
-        env.close() # TODO: any reason why not using it before? (Added to resolve GUI crash when resetting)
+        env.close() # Added to resolve GUI crash when resetting
         results_dict[agent]["results"][folder_name].append(cum_reward)
         print(
             "agent: ",

@@ -39,6 +39,7 @@ class DMAPPolicyModelICL(TorchModelV2, nn.Module):
         )
         nn.Module.__init__(self)
         activation_fn = model_config["fcnet_activation"]
+        # Retrieve the number of steps before freezing in the config file
         self.steps_bf_freezing = model_config['custom_model_config']['steps']
 
         x_prev_space = obs_space.original_space[
@@ -120,6 +121,8 @@ class DMAPPolicyModelICL(TorchModelV2, nn.Module):
         self.steps = 0
         self.saved_K = None
         self.saved_V = None
+        self.embeddings = []
+        self.embeddings_saved = False
 
     @override(TorchModelV2)
     def forward(self, input_dict, state, _):
@@ -140,11 +143,16 @@ class DMAPPolicyModelICL(TorchModelV2, nn.Module):
             tuple(torch.Tensor, object): (action mean and std, input state)
         """
         adapt_input, state_input = self.get_adapt_and_state_input(input_dict)
-        keys, values = self.get_keys_and_values(adapt_input)
+        keys, values, frozen = self.get_keys_and_values(adapt_input)
         embedding = torch.matmul(
             keys, values.transpose(1, 2)
         )  # Shape: (batch, a_size, v_size)
-        # TODO: plot
+        # Save the embedding in an array
+        if embedding.shape[0] == 1:
+            self.embeddings.append(torch.flatten(embedding).detach().tolist())
+        if frozen and not self.embeddings_saved:
+            save_attention(np.array(self.embeddings))
+            self.embeddings_saved = True
         action_elements_list = []
         for i in range(self.a_space_size):
             e_i = embedding[:, i, :]
@@ -190,7 +198,7 @@ class DMAPPolicyModelICL(TorchModelV2, nn.Module):
             adapt_input (torch.Tensor): (K, V)
 
         Returns:
-            tuple(torch.Tensor, torch.Tensor): _description_
+            tuple(torch.Tensor, torch.Tensor, boolean): _description_, boolean indicates whether the attention has been frozen
         """
         self.steps += 1
         if self.steps <= self.steps_bf_freezing:
@@ -212,7 +220,14 @@ class DMAPPolicyModelICL(TorchModelV2, nn.Module):
                 print('---------------------------------------------------------------------------')
                 self.saved_K = softmax_keys
                 self.saved_V = values
-            return softmax_keys, values
+            return softmax_keys, values, False
         else:
-            return self.saved_K, self.saved_V
+            return self.saved_K, self.saved_V, True
         
+
+def save_attention(embeddings):
+    import os
+    from definitions import ROOT_DIR
+    out_folder = os.path.join(ROOT_DIR, "data", "attention")
+    filename = 'results.npy'
+    np.save(os.path.join(out_folder, filename), embeddings)
