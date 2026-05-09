@@ -14,7 +14,7 @@ Check out our website for more details and videos: [DMAP](https://amathislab.git
 ## Notes:
 
 - Dec 2022: Check out this [EPFL news article](https://actu.epfl.ch/news/locomotion-modeling-evolves-with-brain-inspired-ne/) on our work! Also available in [French](https://actu.epfl.ch/news/faire-avancer-la-modelisation-de-la-locomotion/).
-- Nov 2022: For testing our agents, we use a slightly adapted version of the Pybullet-M benchmark. Currently this benchmark code is integrated in our repository, but it will shortly be released as a stand-alone repository (stay tuned). For more information on the benchmark as well as baselines check out:
+- Nov 2022: For testing our agents, we use a slightly adapted version of the Pybullet-M benchmark (see Mann et al. below). This updated benchmark code is integrated in our repositor.
 - Sept 2022: Paper accepted at [NeurIPS 2022](https://nips.cc/Conferences/2022/Schedule)!
 
 Mann, K. S., Schneider, S., Chiappa, A., Lee, J. H., Bethge, M., Mathis, A., & Mathis, M. W. (2021, March). [Out-of-distribution generalization of internal models is correlated with reward.](https://openreview.net/forum?id=hR_TNbCr_nQ) In Self-Supervision for Reinforcement Learning Workshop-ICLR 2021.
